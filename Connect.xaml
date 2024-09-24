@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.app1.Connect"
+             Title="Connect">
+    <VerticalStackLayout VerticalOptions="Fill" HorizontalOptions="Fill">
+        <Button Text="Bluetooth" HorizontalOptions="Fill" VerticalOptions="Start"  Margin="10"></Button>
+        <Button Text="Private IP" HorizontalOptions="Fill" VerticalOptions="Start" Margin="10"></Button>
+        <Button Text="Host Local website" HorizontalOptions="Fill" VerticalOptions="Start" Margin="10"></Button>
+    </VerticalStackLayout>
+
+</ContentPage>

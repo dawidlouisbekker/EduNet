@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Maui.app1.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Maui.app1"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#202020"
+    Shell.BackgroundColor="#181818"
+    Shell.TabBarUnselectedColor="WhiteSmoke"
+    Shell.ForegroundColor="Black"
+    Shell.TitleColor="White"
+    Shell.TabBarTitleColor="White">
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent Title="Home"
+         ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+        </Tab>
+        <Tab Title="Social Network" IsVisible="False">
+            <ShellContent Title="Social Network"
+        ContentTemplate="{DataTemplate local:SocialGroupPage}" Route="Network" />
+        </Tab>
+        <Tab Title="Local Connect" x:Name="LocalConTab">
+            <ShellContent 
+                Title="Connect"
+                ContentTemplate="{DataTemplate local:Connect}"/>
+        </Tab>
+        <Tab Title="Models List and Chat">
+            <ShellContent
+                Title="Chat Ollama"
+                ContentTemplate="{DataTemplate local:ViewModelsPage}"/>
+        </Tab>
+
+
+    </TabBar>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>
+
+
