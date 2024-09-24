@@ -1,4 +1,4 @@
-from flask import Flask, Response, stream_with_context, request, jsonify
+from flask import Flask, Response, stream_with_context, request, jsonify, render_template
 from langchain_community.llms import ollama
 from langchain.chains import RetrievalQA
 from langchain.memory import ConversationBufferMemory
@@ -68,6 +68,11 @@ def generate_AI_response(query :str):
     for chunk in stream:
         print(chunk['message']['content'], end='', flush=True)
         yield chunk['message']['content']
+        
+
+@app.route('/')
+async def index():
+    return render_template('base.html')
         
 @app.route('/stream', methods=['GET'])
 def stream():
