@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.app1.FileAdder"
+             Title="FilePicker">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        
+        <!-- <Picker x:Name="EmbeddingsModelPicker" Title="Choose an option" IsEnabled="False" HorizontalOptions="Start" VerticalOptions="Fill"/>
+           <Button Text="Choose PDFs to continue" HorizontalOptions="Center" VerticalOptions="Start" Margin="20" Clicked="OpenFiles" Grid.Row="0"/>-->
+
+
+        <CollectionView x:Name="FileCollection" Grid.Row="0" VerticalOptions="Fill" HorizontalOptions="Fill">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="False" Padding="0" Margin="0">
+                        <StackLayout Padding="10" VerticalOptions="Fill" HorizontalOptions="Fill" Margin="15">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="file.png" Grid.Column="0" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="50"/>
+                                <Label Text="{Binding FileName}" TextColor="Gray" FontSize="Small" HorizontalOptions="Fill" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                <ImageButton Source="delete.png" HorizontalOptions="End" HeightRequest="20" VerticalOptions="Center" Grid.Column="2" Margin="0,0,10,0"
+                                             Clicked="ImageButton_Clicked"/>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <HorizontalStackLayout Grid.Row="1">
+            <Button Text="Add Files" HorizontalOptions="Start" VerticalOptions="Fill" Margin="12,12,25,12" Clicked="OpenFiles" Grid.Row="1" />
+         <!--   <Button Text="Just Process" IsEnabled="True" IsVisible="True" VerticalOptions="Center" HorizontalOptions="Start" Clicked="Process" Margin="10" x:Name="btnProcess"/> -->
+            <Button Text="Share Processing Power" IsEnabled="False" IsVisible="False" VerticalOptions="Center" HorizontalOptions="End" Clicked="JustProcess" Grid.Row="1"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

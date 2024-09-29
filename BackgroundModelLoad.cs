@@ -25,8 +25,8 @@ namespace Maui.app1
             private static StringDataStore? _instance;
 
             // Constructor is private to prevent instantiation
-            private StringDataStore()
-            {
+           // private StringDataStore()
+           // {
               //  Items = new ObservableCollection<Item>();
               //     for (int i = 0; i < Data.Count; i++) 
               //      {
@@ -35,7 +35,7 @@ namespace Maui.app1
 
               //      }
                
-            } 
+           // } 
         
                 
 
@@ -73,7 +73,7 @@ namespace Maui.app1
                     // Loop to generate buttons dynamically
                     using (StringReader reader = new StringReader(output))
                     {
-                        string line;
+                        string? line;
                         int num = 0;
                         while ((line = reader.ReadLine()) != null)
                         {

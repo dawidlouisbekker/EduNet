@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.app1.EmbeddingsFrontPage"
+             Title="Choose or create collections">
+
+
+   
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label x:Name="ModelLabel"  Grid.Row="0"/>
+        <!--   <Button Text="Choose PDFs to continue" HorizontalOptions="Center" VerticalOptions="Start" Margin="20" Clicked="OpenFiles" Grid.Row="0"/>-->
+
+
+        <ListView x:Name="CollectionsList" Grid.Row="1" SelectionMode="Single" ItemSelected="ItemClicked">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" VerticalOptions="Fill" HorizontalOptions="Fill" Padding="0" Margin="0" BackgroundColor="Transparent">
+                            <StackLayout Padding="10" VerticalOptions="Fill" HorizontalOptions="Fill" Margin="15">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="files.jpg" Grid.Column="0" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="50" Background="Transparent"/>
+                                    <Label Text="{Binding Name}" TextColor="Gray" FontSize="Small" HorizontalOptions="Fill" Grid.Column="1" VerticalTextAlignment="Center" Background="Transparent"/>
+                                    <ImageButton Source="delete.png" HorizontalOptions="End" HeightRequest="20" VerticalOptions="Center" Grid.Column="2" Margin="0,0,10,0"
+                                         Clicked="ImageButton_Clicked" x:Name="btnDelete"  Background="Transparent"/>
+
+                                </Grid>
+
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="2" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Create New Collection" Clicked="CreateCollection" Grid.Column="0"/>
+            <Button Text="View Chat History" Grid.Column="1"/>
+            <Button Text="New Chat" Grid.Column="2"/>
+            <Button Text="Add Files" Clicked="AddFiles" Grid.Column="3"/>
+        </Grid>
+    </Grid>
+
+
+</ContentPage>

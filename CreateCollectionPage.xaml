@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.app1.CreateCollectionPage"
+             Title="CreateCollectionPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="55" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Entry Grid.Row="0" Placeholder="Enter collection name" x:Name="colecName" VerticalOptions="Start" HorizontalOptions="Center" Margin="10" WidthRequest="500"/>
+        <Border HorizontalOptions="Center" VerticalOptions="FillAndExpand" Grid.Row="1" Stroke="Black" StrokeThickness="2" Background="LightGray" Padding="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15,15,15,15" Grid.Row="1" VerticalOptions="Fill" HorizontalOptions="Center"/>
+            </Border.StrokeShape>
+            <HorizontalStackLayout VerticalOptions="Fill" HorizontalOptions="Center">
+                <Image Source="slash2.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Entry x:Name="FolderPath" Placeholder="Folder Path" HorizontalOptions="Center" WidthRequest="400" PlaceholderColor="#808080" IsEnabled="False"/>
+            </HorizontalStackLayout>
+
+        </Border>
+
+
+        <Button Text="Choose Folder (or choose seperate files later)" Clicked="ChooseFolder" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="2"/>
+        <Button Text="Create Collection" Clicked="CreateCollection" BackgroundColor="DarkGray" TextColor="Black" HorizontalOptions="Center" Grid.Row="4" Margin="10"/>
+    </Grid>
+</ContentPage>

@@ -18,10 +18,13 @@
     <MauiXaml Update="Connect.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="EmbeddingsFrontPage.xaml">
+    <MauiXaml Update="CollectionsPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="EmbeddingsPage.xaml">
+    <MauiXaml Update="CreateCollectionPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="FileAdder.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="SharedProcessPage.xaml">

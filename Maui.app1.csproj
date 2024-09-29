@@ -58,12 +58,19 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="CollectionsPage.xaml.cs">
+	    <DependentUpon>CollectionsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="FileAdder.xaml.cs">
+	    <DependentUpon>FileAdder.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SocialGroupPage.xaml.cs">
 	    <DependentUpon>SocialGroupPage.xaml</DependentUpon>
 	  </Compile>
@@ -73,10 +80,13 @@
 	  <MauiXaml Update="Connect.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="EmbeddingsFrontPage.xaml">
+	  <MauiXaml Update="CollectionsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="EmbeddingsPage.xaml">
+	  <MauiXaml Update="CreateCollectionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FileAdder.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SharedProcessPage.xaml">
@@ -97,6 +107,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.Net.SocketsHttpHandler.Http2Support" Value="true" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Context\" />
 	</ItemGroup>
 
 </Project>

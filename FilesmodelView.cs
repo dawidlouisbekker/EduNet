@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Maui.Storage;
+using Microsoft.Maui.Storage;
+using System.Net.Http;
+using System.Threading.Tasks;
 using static Maui.app1.BackgroundModelLoad;
 
 /* Unmerged change from project 'Maui.app1 (net8.0-windows10.0.19041.0)'
@@ -22,7 +26,13 @@ namespace Maui.app1
     {
         public class MainViewModel : INotifyPropertyChanged
         {
+
             public ObservableCollection<PickedFile> PickedFiles { get; set; } = new ObservableCollection<PickedFile>();
+            public ObservableCollection<Collection> Collections { get; set; } = new ObservableCollection<Collection>();
+
+            public string? model { get; set; }
+            public string? FolderPath { get; set; }
+
             public ICommand DeleteItemCommand { get; }
 
             private static MainViewModel? _instance;
@@ -30,7 +40,7 @@ namespace Maui.app1
 
             List<string> paths = new List<string>();
 
-            public void OnDeleteItem(PickedFile PickedFile)
+            public void DeleteFile(PickedFile PickedFile)
             {
                 if (PickedFiles.Contains(PickedFile))
                 {
@@ -38,6 +48,63 @@ namespace Maui.app1
                 }
             }
 
+            public void ListPdfsInDirectory(string directory)
+            {
+                string[] pdfFiles = Directory.GetFiles(directory, "*.pdf");
+
+                foreach (string pdfFile in pdfFiles)
+                {
+                    var pickedfile = new PickedFile { FileName = pdfFile};
+                    PickedFiles.Add(pickedfile);
+                }
+            }
+
+            public async Task<ObservableCollection<Collection>> GetCollectionsAsync()
+            {
+                string url = "http://127.0.0.1:8060/list-collections";
+                using (var client = new HttpClient())
+                {
+                    try
+                    {
+                        using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                        {
+                            response.EnsureSuccessStatusCode();
+
+                            using (var stream = await response.Content.ReadAsStreamAsync())
+                            using (var reader = new System.IO.StreamReader(stream))
+                            {
+                                string line;
+                                while ((line = await reader.ReadLineAsync()) != null)
+                                {
+                                    // Process each line as it is read
+                                    var collection = new Collection { Name = line };
+                                    Collections.Add(collection);
+                                }
+                            }
+                        }
+                    }
+                    catch (HttpRequestException e)
+                    {
+                        
+                    }
+
+                }
+                return Collections;
+            }
+
+            public async Task PickFolder()
+            {
+                
+                var result = await FolderPicker.Default.PickAsync();
+                if (result.IsSuccessful)
+                {
+                    FolderPath = result.Folder.Path;
+                }
+                else
+                {
+                   // await DisplayAlert("Error", result.Exception.Message, "OK");
+                }
+            }
 
             public async Task PickFilesAsync()
             {
@@ -52,17 +119,19 @@ namespace Maui.app1
                 { DevicePlatform.MacCatalyst, new[] { "com.adobe.pdf" } } 
             })
                 };
-                
+
                 var result = await FilePicker.PickMultipleAsync(options);
                 if (result != null)
                 {
                     foreach (var file in result)
                     {
-                        PickedFiles.Add(new PickedFile { FileName = file.FileName, FilePath = file.FullPath });
+                        PickedFiles.Add(new PickedFile { FileName = file.FullPath});
                         paths.Append(file.FullPath);
                     }
                 }
             }
+
+        
 
             public async void SendPickedFiles()
             {
@@ -71,9 +140,9 @@ namespace Maui.app1
 
                 foreach (var pickedFile in PickedFiles)
                 {
-                    if (!string.IsNullOrEmpty(pickedFile.FilePath))
+                    if (!string.IsNullOrEmpty(pickedFile.FileName))
                     {
-                        var contents = new StringContent(pickedFile.FilePath, Encoding.UTF8, "text/plain");
+                        var contents = new StringContent(pickedFile.FileName, Encoding.UTF8, "text/plain");
                         try
                         {
                             var response = await _httpClient.PostAsync(url, contents);
@@ -96,7 +165,8 @@ namespace Maui.app1
                         Console.WriteLine("Error: File path is null or empty.");
                     }
                 }
-              var content = new StringContent("done", Encoding.UTF8, "text/plain");
+                var content = new StringContent("done", Encoding.UTF8, "text/plain");
+                await _httpClient.PostAsync(url, content);
             }
 
 
@@ -106,8 +176,10 @@ namespace Maui.app1
     }
     public class PickedFile
     {
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
+        public string? FileName { get; set; }
     }
-
+    public class Collection
+    {
+        public string? Name { get; set; }
+    }
 }

@@ -6,12 +6,13 @@
         public MainPage()
         {
             InitializeComponent();
-            //Tab Bar should change after login in
+
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SocialGroupPage());
+            //Tab Bar should change after login in
         }
         private void SignUpClicked(object sender, EventArgs e)
         {
